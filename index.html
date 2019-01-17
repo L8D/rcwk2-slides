@@ -30,6 +30,147 @@ https://github.com/l8d/rcwk2-slides
 
 https://l8d.github.io/rcwk2-slides
 
+???
+
+Hello! I am Tenor. Today I'm going to give an overview of my plan for a very
+do-it-yourself approach to setting up a docker-driven continuous integration
+and continuous deployment workflow. I believe there are a lot of ways to
+improve a lot of day-to-day tasks that are commonplace when your project is
+well-automated.
+
+---
+
+# heroku
+
+???
+
+TODO: replace text here with a screenshot of the Heroku logotype?
+
+Heroku is a great example of a project that works well out-of-the-box. You
+can start up a git project, and spend less than 5 minutes getting some fresh
+code to deploy somewhere.
+
+However, Heroku is very limiting if you want to scale horizontally with many
+distributed workers. If you start a project with Heroku, you will eventually
+have to spend the time needed to adopt a much more challenging architecture.
+
+---
+
+# heroku
+
+pros:
+
+???
+
+Here are some pros.
+
+---
+
+# heroku
+
+pros:
+
+- easy to start using
+
+???
+
+Heroku is very east to start using if you've never heard of it before. Heroku
+has a free tier that takes minutes to get most types of projects to work.
+
+---
+
+# heroku
+
+pros:
+
+- easy to start using
+- out-of-the-box workflow for CI/CD
+
+???
+
+If you've never had the experience of watching Heroku build your application
+on the CLI, it is pretty amazing.
+
+This is a particular feature that I find very interesting and I would love to
+have for my own continuous integration and continuous deployment pipeline.
+
+A great advantage of pushing to git over SSH is how fast it can be. If you've
+worked with Heroku's web UI, Travis CI, Circle CI, etc. you know how laggy the
+web clients can be.
+
+With Heroku's user experience, when there is anything particularly wrong with a
+build or test suite, you will know right away if you are pushing straight to
+Heroku's git repositories. You get to watch the build fail in real-time.
+
+---
+
+# heroku
+
+pros:
+
+- easy to start using
+- out-of-the-box workflow for CI/CD
+- even supports docker https://www.heroku.com/deploy-with-docker
+
+???
+
+It even support Docker! Docker is an essential tool for giving developers more
+flexibility and control over what languages and libraries they use.
+
+---
+
+# heroku
+
+pros:
+
+- easy to start using
+- out-of-the-box workflow for CI/CD
+- even supports docker https://www.heroku.com/deploy-with-docker
+
+cons:
+
+???
+
+some cons
+
+---
+
+# heroku
+
+pros:
+
+- easy to start using
+- out-of-the-box workflow for CI/CD
+- even supports docker https://www.heroku.com/deploy-with-docker
+
+cons:
+
+- them moneys yo
+
+???
+
+if you want to build a service-based system, scaling up to several workers can
+be a pain in the ass.
+
+---
+
+# heroku
+
+pros:
+
+- easy to start using
+- out-of-the-box workflow for CI/CD
+- even supports docker https://www.heroku.com/deploy-with-docker
+
+cons:
+
+- them moneys yo
+- not a very self-sufficient approach
+
+???
+
+which I will touch on this later
+
 ---
 
 class: middle
@@ -42,6 +183,11 @@ class: middle
 
 # I have a dream: docker
 
+???
+
+Let's talk about a development workflow that is really awesome and nice to
+have.
+
 ---
 
 class: middle
@@ -49,6 +195,10 @@ class: middle
 # CI workflow
 
 ![the dream part 1](images/thedream-1.png)
+
+???
+
+We start with code on your development machine. The best way to commit some code the network is by typing "git push" of course.
 
 ---
 
@@ -58,6 +208,11 @@ class: middle
 
 ![the dream part 2](images/thedream-2.png)
 
+???
+
+The next piece of this system is a git server. For most of us, we are usually
+pushing straight to GitHub.
+
 ---
 
 class: middle
@@ -66,6 +221,15 @@ class: middle
 
 ![the dream part 3](images/thedream-3.png)
 
+???
+
+So after your new commits are on the new git server, we can kick off the build.
+This is usually taken care of by a continuous integration service. This is
+usually the step of the workflow where your automation happens.
+
+I put a picture of Jenkins because it's a pretty widespread CI server but it is
+not very friendly to learn or debug if you're familiar with Java or Groovy.
+
 ---
 
 class: middle
@@ -73,6 +237,16 @@ class: middle
 # CI workflow
 
 ![the dream part 4](images/thedream-4.png)
+
+???
+
+After your build is done, you usually have build artifacts! These can be the
+static assets that have been optimized by the build process, or entire binary
+files or pretty much anything that needs to be publically accessible for the
+purpose of deployment.
+
+Amazon S3 is a staple industrial tool for just storing files. That is usually
+where our CI servers put the files.
 
 ---
 
@@ -86,6 +260,42 @@ class: middle
 
 class: middle
 
+# CI/CD?
+
+![the dream part 5](images/thedream-5.png)
+
+???
+
+This talk is not just about continuous integration, but also continuous
+deployment. So we're missing the last step in this process which is actually
+deploying our code somewhere.
+
+---
+
+class: middle
+
+# CI/CD?
+
+![the dream part 6](images/thedream-6.png)
+
+---
+
+class: middle
+
+# CI/CD?
+
+![the dream part 7](images/thedream-7.png)
+
+???
+
+This is my abstract representation of that step. It usually just a few lines of
+glew code, but we just as with every other step, we have to make decisions
+about what we choose to glue together.
+
+---
+
+class: middle
+
 # I have a dream
 
 ---
@@ -94,17 +304,14 @@ class: middle
 
 # I have a dream: self-sufficiency
 
----
+???
 
-class: middle
+I think improving the state-of-the-art for FOSS is incredibly important in
+helping the public foster their own communities with freedom from companies
+that offer the best off-the-shelf solutions.
 
-![the dream part 6](images/thedream-6.png)
-
----
-
-class: middle
-
-![the dream part 7](images/thedream-7.png)
+I believe Recurse Center is a great place to explore this philosophy and try to
+provide open-source tools for the community.
 
 ---
 
@@ -112,11 +319,21 @@ class: middle
 
 ![the dream part 8](images/thedream-8.png)
 
+???
+
+So let's zoom in on a continuation of the last step. This big red deploy
+button.
+
 ---
 
 class: middle
 
 ![the dream part 9](images/thedream-9.png)
+
+???
+
+I did say this talk was about deploying on the community cluster so I think
+that is the obvious first place to go about this.
 
 ---
 
@@ -126,6 +343,15 @@ class: middle
 
 ![the dream part 10](images/thedream-10.png)
 
+???
+
+As it turns out, there is no out-of-the-box support for starting a new CI/CD
+pipeline with docker. There is probably a lot of glue work involved in setting
+this up for just one project.
+
+The main problem we need to overcome is the lack of root access that is
+available on the community machines.
+
 ---
 
 class: middle
@@ -133,6 +359,15 @@ class: middle
 # Deploying docker to a community cluster?
 
 ![the dream part 8](images/thedream-8.png)
+
+???
+
+However, I believe there are some tools that are effective at providing a
+platform for deployment in flexible host environments.
+
+If we can successfully build something that works for everyone, then you can
+just use the community CI/CD pipeline and never worry about having to SSH into
+your account to fix deployment bugs.
 
 ---
 
@@ -142,6 +377,12 @@ class: middle
 
 ![the dream part 11](images/thedream-11.png)
 
+???
+
+So I think Kubernetes is the first interesting tool to try in this case. It has
+out-of-the-box support for docker and I hope it is easy to glue to a couple
+other things.
+
 ---
 
 class: middle
@@ -150,6 +391,13 @@ class: middle
 
 ![the dream part 12](images/thedream-12.png)
 
+???
+
+The other industrial-ready option seems to be Mesos with Marathon. Both of
+these tools are equipped to faciliate a variety of hardware. They both have
+extensive documentation on how to hook deployment steps into your build
+servers.
+
 ---
 
 class: middle
@@ -157,6 +405,14 @@ class: middle
 # Uploading to a community bucket?
 
 ![the dream part 7](images/thedream-7.png)
+
+???
+
+On the topic of self-sufficiency, it's not hard to host your own git server or
+just use GitHub, and there are a lot of self-hosted solutions for CI including
+Jenkins. However, Amazon S3 is operated by one of the largest companies in the
+US.
+
 ---
 
 class: middle
@@ -165,6 +421,45 @@ class: middle
 
 ![the dream part 13](images/thedream-13.png)
 
+???
+
+If we want to promote software that enables self-sufficient communities, we
+need to find other solutions that we can power with our own hardware. It's also
+a great way to learn.
+
+---
+
+# I have a dream
+
+---
+
+# I have a dream
+
+![the dream part 15](images/thedream-15.png)
+
+???
+
+the "dat" or "dee ayy tee" protocol is a really revolutionary new technology.
+It has the potentional to enable the entire world to share files and documents
+safely and securely without relying on private data centers. We no longer will
+need tools like S3 if a protocol like Dat is as widespread as HTTP.
+
+recurse.mesh is just something I made up. It does not exist yet but I will be
+buying a few mesh devices and finding ways to host Dat servers on them.
+
+---
+
+class: middle
+
+# Uploading to a community bucket?
+
+![the dream part 13](images/thedream-13.png)
+
+???
+
+So given this new awesome technology, I think we know exactly how to overthrow
+our Amazon overlords.
+
 ---
 
 class: middle
@@ -172,6 +467,13 @@ class: middle
 # Uploading to a community bucket?
 
 ![the dream part 14](images/thedream-14.png)
+
+???
+
+So here's the crazy part. What if our entire pipeline was hosted on the
+communty cluster? We can make all of the data available to every Recurser
+everywhere, and we can use a mesh network to completely eliminate the overhead
+of platform-as-a-service.
 
 ---
 
@@ -183,6 +485,14 @@ class: middle
 - https://www.datprotocol.com/
 - https://beakerbrowser.com/
 - https://try-dat.com/
+
+---
+
+class: middle
+
+![sudomesh](images/sudomesh.jpg)
+
+- https://sudoroom.org/wiki/Mesh
 
     </textarea>
     <script src="remark-latest.min.js">
